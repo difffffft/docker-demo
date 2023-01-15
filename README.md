@@ -129,12 +129,35 @@ docker commit -m="描述信息"  容器ID 新镜像名称:版本号
 # 查看所有卷
 docker volume ls
 
+# 主从同步
+--volumes-from
+```
+
+### Dockerfile
+```
+FROM centos
+VOLUME ["volume01"，"volume02"]
+CMD echo "----end----"
+CMD /bin/bash
 
 
+
+FROM                 #基础镜像
+LABEL                #镜像是谁写的，作者是谁
+RUN                  #镜像构建的时候需要运行的命令
+ADD                  #添加内容
+WORKDIR              #镜像的工作目录
+VOLUME               #挂载卷
+EXPOSE               #暴露端口
+CMD                  #容器启动后要运行的命令，只有最后一个会生效
+ENTRYPOINT           #容器启动后要运行的命令，追加
+COPY                 #将文件拷贝到镜像中
+ENV                  #环境变量
 ```
 
 
-<!-- 案例 -->
+
+### 案例
 ```
 docker run -d -it --name nginx01 -v /home/nginx01:/home -p 3355:80 /bin/bash
 ```
